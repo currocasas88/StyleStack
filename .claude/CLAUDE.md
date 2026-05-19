@@ -20,6 +20,24 @@ Source: https://github.com/forrestchang/andrej-karpathy-skills
 
 ---
 
+Aakash Gupta PM Skills
+Source: https://github.com/aakashg/pm-claude-skills
+5 core skills — each encodes a specific PM workflow for consistency:
+
+idea-validator — test product hypotheses against data; surface gaps before building
+linkedin-post-writer — turn product updates into shareable posts
+product-designer — structured approach to feature design with tradeoffs
+prompt-engineer — meta-skill for writing better prompts to Claude
+status-update-writer — weekly/monthly recap format with context, wins, blockers
+
+Most relevant for StyleStack: idea-validator (hypothesis testing), status-update-writer (validation recap).
+Install when Claude Code is live:
+git clone https://github.com/aakashg/pm-claude-skills.git ~/pm-claude-skills
+mkdir -p .claude/skills
+cp -r ~/pm-claude-skills/skills/* .claude/skills/
+
+---
+
 ## Pawel Huryn PM Skills
 Source: https://github.com/phuryn/pm-skills
 Install when Claude Code is live: `/plugin marketplace add phuryn/pm-skills`
