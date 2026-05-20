@@ -6,7 +6,7 @@ CLAUDE-PROFILE Drive ID: 126im6XV_ZOYsueDr_cQ4LpsSMTQOlGigaWXvVYOL7I4
 
 Confirmed rules: concise outputs · push back on unclear scope · flag assumptions ·
 use skills for repetition · try before asking · no transient Drive files ·
-doc format routing (data → Sheet, narrative → Doc with H1/H2/H3)
+doc format routing (data → Sheet, narrative → Google Doc)
 
 ---
 
@@ -20,7 +20,7 @@ Source: https://github.com/forrestchang/andrej-karpathy-skills
 
 ---
 
-Aakash Gupta PM Skills
+## Aakash Gupta PM Skills
 Source: https://github.com/aakashg/pm-claude-skills
 5 core skills — each encodes a specific PM workflow for consistency:
 
@@ -52,12 +52,17 @@ Most relevant for StyleStack: `/discover` (assumption mapping), `/research` (int
 ### Phase
 Validation. Do not build features. Test cheaply. Assumptions must be explicit.
 
-### Source of truth
-- Shireen = source of truth on user experience and ICP
+### Core Bet
+StyleStack is a trend-native closet management tool: upload photos → get outfit suggestions informed by current fashion trends + season. Core hypothesis: if friction to upload is low and suggestions feel trend-aware, users will engage and return.
+
+### Source of Truth
+- Shireen = source of truth on user experience and ICP (plus 5 alpha testers, not just Shireen)
 - 00-context in Drive (folder 1qPKN4ipFJuR5dpnoKHtlK7eYetgwJGUw) = project status
 - DECISIONS.md in Drive = all decisions with rationale
+- MVP-SCOPE = scope boundary + amendment criteria
+- MEASUREMENT-FRAMEWORK = validation targets + kill conditions
 
-### Tech stack (decided)
+### Tech Stack (decided)
 React Native (Expo) + TypeScript strict · Supabase (auth + Postgres + storage) ·
 Anthropic API (classification + outfit logic) · Photoroom (background removal) ·
 Zustand (state) · Expo Router (navigation)
@@ -69,10 +74,55 @@ Zustand (state) · Expo Router (navigation)
 - 03-Technical: 1hZwP72IzhwRLWXE2NGm-lSb4BxUJ1GMq
 - 04-Shireen:  1CPPwv0I59MX0DvYWJr76v82bNFTWWuwq
 
-### Document format routing (mandatory)
-- Narrative → DOCX via docx-js · load /mnt/skills/public/docx/SKILL.md first
-- Data → XLSX via openpyxl · load /mnt/skills/public/xlsx/SKILL.md first
+### Document Format Routing (mandatory)
+- Narrative docs (specs, briefs, strategy, reports) → Google Doc via Drive MCP (text/plain → auto-converts)
+- Data / trackers → Google Sheet via Drive MCP
+- Do NOT use docx-js or openpyxl pipelines for Drive uploads — they produce broken files
 - Friday: paste session recap into DECISIONS.md in Drive
+
+---
+
+## Phase 1 Validation Architecture (Weeks 1–6)
+
+### The 4 Critical Unknowns Being Tested
+- **U1: Upload Friction** — Can users upload 20+ items without dropout?
+- **U2: Suggestion Quality** — Do ≥70% of suggestions rate 3+ on a 1–5 scale?
+- **U3: Trend Sourcing** — Can we source/curate trends cost-effectively + accurately?
+- **U4: Vision API Accuracy** — Does automatic tagging catch colors/styles correctly?
+
+See MEASUREMENT-FRAMEWORK (01-Strategy folder) for targets, acceptable thresholds, and kill conditions.
+
+### MVP Scope
+See MVP-SCOPE (01-Strategy folder) for:
+- Core flows (photo upload → closet → outfit suggestions → trend display)
+- Deferred features (multi-user closets, brand tagging, ML suggestions, social, mobile app)
+- Feature amendment criteria (≥50% mention unprompted + blocks core job + <8 hour implementation)
+
+### False Positives to Watch
+- Shireen enthusiasm ≠ product value (watch the 5 friends, not Shireen)
+- Completion ≠ low friction (also track time per item)
+- Early adopter novelty (test Week 2 retention, not just Week 1)
+- "It's cool" ≠ "I'll use it" (measure behaviour, not praise)
+- 1 great suggestion ≠ success (need ≥70% threshold across all suggestions)
+
+---
+
+## Weekly Ritual (Every Friday 9 AM)
+Full protocol in Cowork task "Weekly Review + Learning". StyleStack-specific addition: devil's advocate pass (see Step 8 in that task).
+
+**Step 1 (20 min): Debrief with Shireen**
+- Upload counts, time per item, pain points, exact quotes
+- Suggestion ratings, trend relevance feedback
+- Any unexpected moments (positive or negative)
+
+**Step 2 (20 min): Devil's Advocate Pass with Claude**
+- Bias check, assumption challenge, interpretation check, kill condition alert
+- See Cowork task Step 8 for the four question templates
+
+**Step 3 (10 min): Decision & Documentation**
+- Update 00-context with Week X Summary
+- Confidence level per unknown (High/Medium/Low)
+- Escalate any kill condition risk to DECISIONS.md immediately
 
 ---
 
@@ -82,3 +132,28 @@ If stuck or hitting an error building a file/document:
 2. Report the specific error in one sentence
 3. Skip to next task immediately
 Never spend more than 1 retry on the same error. Token waste from retry loops is not acceptable.
+
+---
+
+## Session Template (Claude Code)
+
+Start of every session:
+```
+Read CLAUDE.md first.
+Phase: Validation — no feature building.
+Task: [specific task]
+Success criteria: [how will we know this is done?]
+```
+
+End of every session:
+- Note any new architectural decisions or assumptions introduced
+- Commit if relevant
+- Link any open questions to DECISIONS.md
+
+---
+
+## Git Integration
+- .claude/CLAUDE.md in the repo is the working copy during dev sessions
+- This Drive copy is the reference; sync manually ~1x/week
+- GitHub is primary for skills, decisions, and version history
+
