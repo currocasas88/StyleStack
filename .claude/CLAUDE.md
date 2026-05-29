@@ -208,7 +208,10 @@ CREATE TABLE wear\_log (
 - [ ] F11: "Why this?" explanation (Claude Haiku on demand)  
 - [ ] F12: Visible style profile (radar chart, editable)  
 - [ ] F14: Wardrobe utilization stat (requires 30 days of wear data)  
-- [ ] F16: Weekly in-app changelog card
+- [ ] F16: Weekly in-app changelog card  
+- [ ] F-REG1: Regression test suite — weekly SQL diff on K1–K5 \+ core queries  
+- [ ] F-REG2: Vision API accuracy tracking — weekly manual spot-check (5 photos, verify \<80% accuracy threshold)  
+- [ ] F-REG3: Matcher rule change tracking — snapshot K1 before/after any F05 rule change, alert if \>5% regression
 
 ### **Phase 4+ — Deferred (do not build until Phase 2 gates pass)**
 
@@ -329,6 +332,7 @@ Huryn pattern: before any significant decision, search here first. If prior deci
 | 2026-05-29 | Gmail CASA assessment deferred until F08 is production-ready | Start CASA Week 1 | F08 is Phase 2+. 100-user cap without CASA acceptable through entire beta. Start CASA when warm consent (K5) passes. Email forwarding workaround: legal review needed before investing in user guide. | F08 cannot exceed 100 Gmail users without CASA. ~~6 week lead time. Legal review cost same as CASA decision (~~$300–500). |
 | 2026-05-29 | OpenWeatherMap deferred to Phase 4 | Build in Phase 1 | Weather suggestions require wear log data (F-NEW2). Wear log populates Phase 2+. Feature valueless without retention data. Cost negligible — timing is issue. | Weather removed from MVP scope. Phase 3 gates must pass first. |
 | 2026-05-29 | Generic catalog images: Unsplash/Pexels/original only | Retailer product imagery | Retailer imagery violates ToS and causes App Store rejection. Unsplash/Pexels permissive. Shireen can photograph 20–30 pieces if free sources insufficient. | Upfront work sourcing images. Generic items phase out as real catalog grows. |
+| 2026-05-29 | Regression testing: lightweight SQL-based weekly approach | Automated testing frameworks, no testing | Weekly SQL diff (kill\_conditions\_schema.sql → regression\_baseline\_$(date).csv). Identifies Vision API accuracy drift, suggestion quality degradation, schema migration issues. Starts Phase 3\. | Adds 30 min/week overhead. Worth the safety guarantee. |
 
 ---
 
